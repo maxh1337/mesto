@@ -1,35 +1,31 @@
-let modal = document.querySelector('.modal');
+let popup = document.querySelector('.popup');
 let profileName = document.querySelector('.profile__name');
 let profileAbout = document.querySelector('.profile__about');
 let userEditBtn = document.querySelector('.profile__edit-btn');
-let formCloseBtn = document.querySelector('.modal__close-btn');
-let formElement = document.querySelector('.modal__form');
-let nameInput = document.querySelector('.modal__input_type_username');
-let aboutInput = document.querySelector('.modal__input_type_about');
+let formCloseBtn = document.querySelector('.popup__close-btn');
+let formElement = document.querySelector('.popup__form');
+let nameInput = document.querySelector('.popup__input_type_username');
+let aboutInput = document.querySelector('.popup__input_type_about');
 
-function showModal() {
-	modal.classList.add('modal_opened');
+function showpopup() {
+	popup.classList.add('popup_opened');
 	nameInput.value = profileName.textContent;
 	aboutInput.value = profileAbout.textContent;
 }
 
-function closeModal() {
-	modal.classList.remove('modal_opened');
+function closepopup() {
+	popup.classList.remove('popup_opened');
 }
 
 function formSubmitHandler(event) {
 	event.preventDefault();
 	profileName.textContent = nameInput.value;
 	profileAbout.textContent = aboutInput.value;
-	closeModal();
+	closepopup();
 }
 
-userEditBtn.addEventListener('click', function () {
-	showModal();
-});
+userEditBtn.addEventListener('click', showpopup);
 
-formCloseBtn.addEventListener('click', function () {
-	closeModal();
-});
+formCloseBtn.addEventListener('click', closepopup);
 
 formElement.addEventListener('submit', formSubmitHandler);

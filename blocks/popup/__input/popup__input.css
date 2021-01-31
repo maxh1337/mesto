@@ -1,4 +1,4 @@
-.modal__input {
+.popup__input {
 	margin-bottom: 30px;
 	padding: 0 0 12px;
 	font-size: 14px;
@@ -8,16 +8,16 @@
 	border-bottom: 1px solid rgba(0, 0, 0, .2);
 }
 
-.modal__input:last-of-type {
+.popup__input:last-of-type {
 	margin-bottom: 48px;
 }
 
-.modal__input:focus {
+.popup__input:focus {
 	border-bottom: 1px solid #000;
 }
 
 @media (max-width: 630px) {
-	.modal__input:last-of-type {
+	.popup__input:last-of-type {
 		margin-bottom: 45px;
 	}
 }

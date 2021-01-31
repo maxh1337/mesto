@@ -1,4 +1,4 @@
-.modal__close-btn {
+.popup__close-btn {
 	padding: 0;
 	min-width: 40px;
 	min-height: 40px;
@@ -10,7 +10,7 @@
 }
 
 @media (max-width: 630px) {
-	.modal__close-btn {
+	.popup__close-btn {
 		min-height: 25px;
 		right: 0;
 		background-size: cover;
