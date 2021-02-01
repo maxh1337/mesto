@@ -1,4 +1,4 @@
-let Popup = document.querySelector('.popup');
+let popup = document.querySelector('.popup');
 let profileName = document.querySelector('.profile__name');
 let profileAbout = document.querySelector('.profile__about');
 let userEditBtn = document.querySelector('.profile__edit-btn');
@@ -8,13 +8,13 @@ let nameInput = document.querySelector('.popup__input_type_username');
 let aboutInput = document.querySelector('.popup__input_type_about');
 
 function showPopup() {
-	Popup.classList.add('popup_opened');
+	popup.classList.add('popup_opened');
 	nameInput.value = profileName.textContent;
 	aboutInput.value = profileAbout.textContent;
 }
 
 function closePopup() {
-	Popup.classList.remove('popup_opened');
+	popup.classList.remove('popup_opened');
 }
 
 function formSubmitHandler(event) {
