@@ -48,7 +48,7 @@ const TITLE_LIST = [
   { title: "Церковь Георгия Победоносца" },
 ];
 
-const cardContainer = document.querySelector(".cards");
+/*const cardContainer = document.querySelector(".cards");
 const templateEl = document.querySelector(".template");
 
 function render() {
@@ -56,6 +56,7 @@ function render() {
 
   cardContainer.append(...html);
 }
+render();
 
 function getItemHTML(item) {
   return `<article class="card">
@@ -73,7 +74,22 @@ function getItem(item) {
 
   return newItem;
 }
+render();*/
+const cardContainer = document.querySelector(".cards");
+const templateEl = document.querySelector(".template");
 
+function render() {
+  const html = TITLE_LIST.map(getItem);
+  cardContainer.append(...html);
+}
+
+function getItem(item) {
+  const newItem = templateEl.content.cloneNode(true);
+  const TitleEl = newItem.querySelector(".card__title");
+  TitleEl.textContent = item.title;
+  return newItem;
+}
+render();
 /*function getItem(item) {
     const newItem = templateEl.content.cloneNode(true);
     const headerEl = newItem.querySelector('.card__title');
