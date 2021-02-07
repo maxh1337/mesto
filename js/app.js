@@ -49,7 +49,7 @@ const TITLE_LIST = [
 ];
 
 const cardContainer = document.querySelector(".cards");
-const templateEl = document.querySelector("#template");
+const templateEl = document.querySelector(".template");
 
 function render() {
   const html = TITLE_LIST.map(getItem);
