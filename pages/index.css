@@ -23,6 +23,7 @@
 @import url("../blocks/popup/__save-btn/popup__save-btn.css");
 @import url("../blocks/cards/cards.css");
 @import url("../blocks/card/card.css");
+@import url("../blocks/card/__container/card__container.css");
 @import url("../blocks/card/__remove/card__remove.css");
 @import url("../blocks/card/__image/card__image.css");
 @import url("../blocks/card/__action/card__action.css");
@@ -31,3 +32,11 @@
 @import url("../blocks/card/__like/_filled/card__like_filled.css");
 @import url("../blocks/footer/footer.css");
 @import url("../blocks/footer/__copyright/footer__copyright.css");
+@import url("../blocks/place/place.css");
+@import url("../blocks/place/_opened/place_opened.css");
+@import url("../blocks/place/__container/place__container.css");
+@import url("../blocks/place/__close-btn/place__close-btn.css");
+@import url("../blocks/place/__title/place__title.css");
+@import url("../blocks/place/__form/place__form.css");
+@import url("../blocks/place/__input/place__input.css");
+@import url("../blocks/place/__save-btn/place__save-btn.css");

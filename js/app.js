@@ -7,15 +7,21 @@ let formElement = document.querySelector(".popup__form");
 let nameInput = document.querySelector(".popup__input_type_username");
 let aboutInput = document.querySelector(".popup__input_type_about");
 
+
 function showPopup() {
   popup.classList.add("popup_opened");
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
 }
-
 function closePopup() {
   popup.classList.remove("popup_opened");
 }
+
+userEditBtn.addEventListener("click", showPopup);
+
+formCloseBtn.addEventListener("click", closePopup);
+
+formElement.addEventListener("submit", formSubmitHandler);
 
 function formSubmitHandler(event) {
   event.preventDefault();
@@ -24,11 +30,26 @@ function formSubmitHandler(event) {
   closePopup();
 }
 
-userEditBtn.addEventListener("click", showPopup);
+// Popup с додавлением новой карточки
 
-formCloseBtn.addEventListener("click", closePopup);
+let place = document.querySelector(".place");
+let placeCloseBtn = document.querySelector(".place__close-btn");
+let placeForm = document.querySelector(".place__form");
+let placeName = document.querySelector(".place__input_type_name");
+let placeLink = document.querySelector(".place__input_type_link");
+let placeOpenBtn = document.querySelector(".profile__add-btn");
 
-formElement.addEventListener("submit", formSubmitHandler);
+function showPlace() {
+  place.classList.add("place_opened");
+}
+
+function closePlace() {
+  place.classList.remove("place_opened"); 
+}
+
+placeOpenBtn.addEventListener("click", showPlace);
+
+placeCloseBtn.addEventListener("click", closePlace);
 
 // Подгрузка блоков card с помощью template тега
 const initialCards = [
@@ -63,7 +84,7 @@ const templateEl = document.querySelector(".template");
 function render() {
   const html = initialCards.map(getItem);
   cardContainer.append(...html);
-  cardContainer.append(...src);
+  //cardContainer.append(...src);
 }
 function getItem(item) {
   const newItem = templateEl.content.cloneNode(true);
@@ -95,3 +116,17 @@ function handleLike(event) {
 }
 
 render();
+
+const inputName = document.querySelector(".place__input_type_name");
+const inputLink = document.querySelector(".place__input_type_link");
+
+function handleAdd() {
+const inputText = inputName.value;
+const inputLinks = inputLink.value;
+const listLink = getItem({link: inputLinks})
+const listItem = getItem({name: inputText});
+cardContainer.prepend(listItem);
+cardContainer.prepend(listLink);
+inputName.value = ""
+inputLink.value = ""
+}

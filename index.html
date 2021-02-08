@@ -20,6 +20,17 @@
 			</form>
 		</div>
 	</div>
+	<div class="place">
+		<div class="place__container">
+			<button type="button" class="place__close-btn elem-click"></button>
+			<h2 class="place__title">Новое место</h2>
+			<form name="profile-edit" class="place__form">
+				<input type="text" placeholder="Название" name="newplace-name" class="place__input place__input_type_name">
+				<input type="text" placeholder="Ссылка на картинку" name="newplace-link" class="place__input place__input_type_link">
+				<button type="submit" class="popup__save-btn elem-click">Сохранить</button>
+			</form>
+		</div>
+	</div>
 	<div class="page__content">
 		<header class="header">
 			<img src="./images/logo.svg" class="logo" alt="Логотип Mesto">
@@ -43,12 +54,12 @@
 			<p class="footer__copyright">&copy; 2021 Mesto Russia by Воробьев Максим</p>
 		</footer>
 	</div>
-	
+
 	<template class="template">
 		<article class="card">
-			<div style="display: flex; justify-content: flex-end; align-items: start;">
-			<button type="button" class="card__remove elem-click"></button>
-		    </div>
+			<div class="card__container">
+				<button type="button" class="card__remove elem-click"></button>
+			</div>
 			<img src="" alt="Озеро Байкал" class="card__image ">
 			<div class="card__action">
 				<h2 class="card__title"></h2>
@@ -56,7 +67,7 @@
 			</div>
 		</article>
 	</template>
-<script src="./js/app.js"></script>
+	<script src="./js/app.js"></script>
 </body>
 
 </html>
