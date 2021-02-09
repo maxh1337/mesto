@@ -84,7 +84,6 @@ const templateEl = document.querySelector(".template");
 function render() {
   const html = initialCards.map(getItem);
   cardContainer.append(...html);
-  //cardContainer.append(...src);
 }
 function getItem(item) {
   const newItem = templateEl.content.cloneNode(true);
