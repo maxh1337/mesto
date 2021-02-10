@@ -1,3 +1,6 @@
+//Будет много комментариев, я тупой. И они помогут мне потом понять, что я вообще тут накодил) :) Thanks.
+
+
 let popup = document.querySelector(".popup");
 let profileName = document.querySelector(".profile__name");
 let profileAbout = document.querySelector(".profile__about");
@@ -7,13 +10,13 @@ let formElement = document.querySelector(".popup__form");
 let nameInput = document.querySelector(".popup__input_type_username");
 let aboutInput = document.querySelector(".popup__input_type_about");
 
-
-function showPopup() {
+//первый popup с редактированием информации о человеке
+function showPopup() {  //открыть
   popup.classList.add("popup_opened");
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
 }
-function closePopup() {
+function closePopup() { // закрыть
   popup.classList.remove("popup_opened");
 }
 
@@ -23,14 +26,14 @@ formCloseBtn.addEventListener("click", closePopup);
 
 formElement.addEventListener("submit", formSubmitHandler);
 
-function formSubmitHandler(event) {
+function formSubmitHandler(event) { //после изменения данных, закрыть popup
   event.preventDefault();
   profileName.textContent = nameInput.value;
   profileAbout.textContent = aboutInput.value;
   closePopup();
 }
 
-// Popup с додавлением новой карточки
+// Popup с додавлением новой карточки (place)
 
 let place = document.querySelector(".place");
 let placeCloseBtn = document.querySelector(".place__close-btn");
@@ -38,18 +41,37 @@ let placeForm = document.querySelector(".place__form");
 let placeName = document.querySelector(".place__input_type_name");
 let placeLink = document.querySelector(".place__input_type_link");
 let placeOpenBtn = document.querySelector(".profile__add-btn");
+let placeCardForm = document.querySelector(".place__form");
+let placeSaveBtn = document.querySelector(".popup__save-btn");
 
+//открыть popup
 function showPlace() {
   place.classList.add("place_opened");
 }
-
+//закрыть popup
 function closePlace() {
   place.classList.remove("place_opened"); 
 }
-
 placeOpenBtn.addEventListener("click", showPlace);
 
 placeCloseBtn.addEventListener("click", closePlace);
+
+placeSaveBtn.addEventListener("submit", saveNewPlace);
+
+//функия добавления новой карточки
+
+function saveNewPlace(evt) {
+evt.preventDefault();
+const inputName = placeName.value; //приравниваю значения
+const inputLink = placeLink.value;//приравниваю значения
+const savePlace = getItem({link: inputLink, name: inputName});  //добавляю в функцию getItem введенные значения Имени и ссылки на карточку
+cardContainer.prepend(savePlace); //вставляю в блок с карточками собранную конструкцию в самое начало (prepend)
+inputName.value = "" ; // значения будут вставленны в "" скобках
+inputLink.value = "" ; 
+closePlace(evt); // по окончанию работы функции закрыть popup(блока place)
+}
+
+let formListener = document.querySelector(".place__form").addEventListener("submit", saveNewPlace);
 
 // Подгрузка блоков card с помощью template тега
 const initialCards = [
@@ -86,46 +108,32 @@ function render() {
   cardContainer.append(...html);
 }
 function getItem(item) {
-  const newItem = templateEl.content.cloneNode(true);
-  const nameEl = newItem.querySelector(".card__title");
-  nameEl.textContent = item.name;
+  const newItem = templateEl.content.cloneNode(true);  //клонируем template конструкцию
+  const nameEl = newItem.querySelector(".card__title"); 
+  nameEl.textContent = item.name;  
 
   const linkEl = newItem.querySelector(".card__image");
   linkEl.src = item.link;
 
   const removeCard = newItem.querySelector(".card__remove");
-  removeCard.addEventListener("click", handleRemove);
+  removeCard.addEventListener("click", handleRemove); //удаление карточки 
 
   const filledLike = newItem.querySelector(".card__like");
-  filledLike.addEventListener("click", handleLike);
+  filledLike.addEventListener("click", handleLike); //лайк на карточку
 
   return newItem;
 }
 
-function handleRemove(event) {
+function handleRemove(event) {    //функция удаления в которой удаляется самый ближний элемент card
   const targetEl = event.target;
   const targetItem = targetEl.closest(".card");
   targetItem.remove();
 }
 
 function handleLike(event) {
-  const targetEl = event.target;
-  const targetItem = targetEl.closest(".card__like");
+  const targetEl = event.target;   //как и в примере с удалением, лайк ставится на самый близкий
+  const targetItem = targetEl.closest(".card__like"); 
   targetItem.classList.toggle("card__like_filled");
 }
 
 render();
-
-const inputName = document.querySelector(".place__input_type_name");
-const inputLink = document.querySelector(".place__input_type_link");
-
-function handleAdd() {
-const inputText = inputName.value;
-const inputLinks = inputLink.value;
-const listLink = getItem({link: inputLinks})
-const listItem = getItem({name: inputText});
-cardContainer.prepend(listItem);
-cardContainer.prepend(listLink);
-inputName.value = ""
-inputLink.value = ""
-}
