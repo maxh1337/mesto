@@ -20,7 +20,7 @@
 @import url("../blocks/popup/__title/popup__title.css");
 @import url("../blocks/popup/__form/popup__form.css");
 @import url("../blocks/popup/__input/popup__input.css");
-@import url("../blocks/popup/__gallery_place/popup__gallery_place.css");
+@import url("../blocks/popup/__gallery_place/popup_gallery_place.css");
 @import url("../blocks/popup/__gallery_title/popup__gallery_title.css");
 @import url("../blocks/popup/__save-btn/popup__save-btn.css");
 @import url("../blocks/popup/__image/popup__image.css");
