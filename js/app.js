@@ -121,11 +121,12 @@ function getItem(item) {
   filledLike.addEventListener("click", handleLike); //лайк на карточку
   
   // открытие popup фоточек карточек
-  const cardImage = document.querySelector(".card__image");
+
   
   const galleryCloseBtn = document.querySelector(".popup__gallery-btn");
+  const cardImage = newItem.querySelector(".card__image");
   const galleryOpenBtn = cardImage;
-  galleryOpenBtn.addEventListener("click", showGallery);  
+  galleryOpenBtn.addEventListener("click", showGallery);
   galleryCloseBtn.addEventListener("click", closeGallery);
   return newItem;
 }
@@ -148,10 +149,11 @@ function handleLike(event) {
 
 // Открытие popup c карточкой
 
-const galleryPopup = document.querySelector(".popup__gallery");
+const galleryPopup = document.querySelector(".popup__gallery_place");
 
 function showGallery(evt) {
-galleryPopup.classList.add("popup__opened");
+// console.dir(evt.target)
+galleryPopup.classList.add("popup_opened");
 const targetEl = evt.target;
 const targetItem = targetEl.closest('.card');
 const cardTitle = targetItem.querySelector('.card__title');
@@ -159,7 +161,8 @@ const popupGalleryTitle = document.querySelector(".popup__gallery_title");
 const popupGalleryImage = document.querySelector(".popup__image");
 const galleryImage = targetItem.querySelector("card__image");
 popupGalleryTitle.textContent = cardTitle.textContent;
-popupGalleryImage.src = galleryImage.src;
+// popupGalleryImage.src = evt.galleryImage.src;
+popupGalleryImage.src = evt.target.src
 }
 
 function closeGallery() {
