@@ -36,7 +36,7 @@ function formSubmitHandler(event) { //после изменения данных
 // Popup с додавлением новой карточки (place)
 
 let place = document.querySelector(".popup_place");
-let placeCloseBtn = document.querySelector(".popup_place_close-btn");
+let placeCloseBtn = document.querySelector(".popup__place-btn_place");
 // let placeForm = document.querySelector(".place__form");
 let placeName = document.querySelector(".popup__input_type_name");
 let placeLink = document.querySelector(".popup__input_type_link");
@@ -70,7 +70,7 @@ inputLink.value = "" ;
 closePlace(evt); // по окончанию работы функции закрыть popup(блока place)
 }
 
-let formListener = document.querySelector(".popup_place_form").addEventListener("submit", saveNewPlace);
+let formListener = document.querySelector(".popup__form_place").addEventListener("submit", saveNewPlace);
 
 // Подгрузка блоков card с помощью template тега
 const initialCards = [
@@ -157,7 +157,7 @@ galleryPopup.classList.add("popup_opened");
 const targetEl = evt.target;
 const targetItem = targetEl.closest('.card');
 const cardTitle = targetItem.querySelector('.card__title');
-const popupGalleryTitle = document.querySelector(".popup_gallery_title");
+const popupGalleryTitle = document.querySelector(".popup__title_gallery");
 const popupGalleryImage = document.querySelector(".popup__image");
 const galleryImage = targetItem.querySelector("card__image");
 popupGalleryTitle.textContent = cardTitle.textContent;
