@@ -35,22 +35,21 @@ function formSubmitHandler(event) { //после изменения данных
 
 // Popup с додавлением новой карточки (place)
 
-let place = document.querySelector(".place");
-let placeCloseBtn = document.querySelector(".place__close-btn");
-let placeForm = document.querySelector(".place__form");
-let placeName = document.querySelector(".place__input_type_name");
-let placeLink = document.querySelector(".place__input_type_link");
+let place = document.querySelector(".popup__place");
+let placeCloseBtn = document.querySelector(".popup__place_close-btn");
+// let placeForm = document.querySelector(".place__form");
+let placeName = document.querySelector(".popup__input_type_name");
+let placeLink = document.querySelector(".popup__input_type_link");
 let placeOpenBtn = document.querySelector(".profile__add-btn");
-let placeCardForm = document.querySelector(".place__form");
 let placeSaveBtn = document.querySelector(".popup__save-btn");
 
 //открыть popup
 function showPlace() {
-  place.classList.add("place_opened");
+  place.classList.add("popup_opened");
 }
 //закрыть popup
 function closePlace() {
-  place.classList.remove("place_opened"); 
+  place.classList.remove("popup_opened"); 
 }
 placeOpenBtn.addEventListener("click", showPlace);
 
@@ -71,7 +70,7 @@ inputLink.value = "" ;
 closePlace(evt); // по окончанию работы функции закрыть popup(блока place)
 }
 
-let formListener = document.querySelector(".place__form").addEventListener("submit", saveNewPlace);
+let formListener = document.querySelector(".popup__place_form").addEventListener("submit", saveNewPlace);
 
 // Подгрузка блоков card с помощью template тега
 const initialCards = [
@@ -120,20 +119,51 @@ function getItem(item) {
 
   const filledLike = newItem.querySelector(".card__like");
   filledLike.addEventListener("click", handleLike); //лайк на карточку
-
+  
+  // открытие popup фоточек карточек
+  const cardImage = document.querySelector(".card__image");
+  
+  const galleryCloseBtn = document.querySelector(".popup__gallery-btn");
+  const galleryOpenBtn = cardImage;
+  galleryOpenBtn.addEventListener("click", showGallery);  
+  galleryCloseBtn.addEventListener("click", closeGallery);
   return newItem;
 }
 
-function handleRemove(event) {    //функция удаления в которой удаляется самый ближний элемент card
+//функция удаления в которой удаляется самый ближний элемент card
+function handleRemove(event) {
   const targetEl = event.target;
   const targetItem = targetEl.closest(".card");
   targetItem.remove();
 }
 
+//как и в примере с удалением, лайк ставится на самый близкий
 function handleLike(event) {
-  const targetEl = event.target;   //как и в примере с удалением, лайк ставится на самый близкий
+  const targetEl = event.target;   
   const targetItem = targetEl.closest(".card__like"); 
   targetItem.classList.toggle("card__like_filled");
+}
+
+
+
+// Открытие popup c карточкой
+
+const galleryPopup = document.querySelector(".popup__gallery");
+
+function showGallery(evt) {
+galleryPopup.classList.add("popup__opened");
+const targetEl = evt.target;
+const targetItem = targetEl.closest('.card');
+const cardTitle = targetItem.querySelector('.card__title');
+const popupGalleryTitle = document.querySelector(".popup__gallery_title");
+const popupGalleryImage = document.querySelector(".popup__image");
+const galleryImage = targetItem.querySelector("card__image");
+popupGalleryTitle.textContent = cardTitle.textContent;
+popupGalleryImage.src = galleryImage.src;
+}
+
+function closeGallery() {
+	galleryPopup.classList.remove('popup_opened');
 }
 
 render();
