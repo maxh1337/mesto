@@ -36,7 +36,7 @@ function formSubmitHandler(event) { //после изменения данных
 // Popup с додавлением новой карточки (place)
 
 let place = document.querySelector(".popup_place");
-let placeCloseBtn = document.querySelector(".popup__place-btn_place");
+let placeCloseBtn = document.querySelector(".popup__close-btn_place");
 // let placeForm = document.querySelector(".place__form");
 let placeName = document.querySelector(".popup__input_type_name");
 let placeLink = document.querySelector(".popup__input_type_link");
