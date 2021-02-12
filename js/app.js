@@ -75,7 +75,7 @@ function saveNewPlace(evt) {
   cardContainer.prepend(savePlace); //вставляю в блок с карточками собранную конструкцию в самое начало (prepend)
   inputName.value = ""; // значения будут вставленны в "" скобках
   inputLink.value = "";
-  closePlace(evt); // по окончанию работы функции закрыть popup(блока place)
+  closePlacePopup(evt); // по окончанию работы функции закрыть popup(блока place)
 }
 
 const formListener = document
