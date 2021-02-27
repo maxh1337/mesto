@@ -7,23 +7,26 @@ const formCloseBtn = profilePopup.querySelector(".popup__close-btn");
 const formElement = profilePopup.querySelector(".popup__form");
 const nameInput = document.querySelector(".popup__input_type_username");
 const aboutInput = document.querySelector(".popup__input_type_about");
+const popupAll = document.querySelectorAll('.popup')
 
 //первый popup с редактированием информации о человеке
 function showPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keydown", closePopupThenEscape);
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closePopupThenEscape);
 }
 
 function showProfilePopup() {
-  showPopup(profilePopup)
+  showPopup(profilePopup);
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
 }
 function closeProfilePopup() {
-   closePopup(profilePopup);
+  closePopup(profilePopup);
 }
 
 userEditBtn.addEventListener("click", showProfilePopup);
@@ -53,11 +56,11 @@ const popupGalleryImage = document.querySelector(".popup__image");
 const galleryCloseBtn = document.querySelector(".popup__close-btn_gallery");
 //открыть popup
 function showPlacePopup() {
-  showPopup(place)
+  showPopup(place);
 }
 //закрыть popup
 function closePlacePopup() {
-  closePopup(place)
+  closePopup(place);
 }
 placeOpenBtn.addEventListener("click", showPlacePopup);
 
@@ -133,7 +136,6 @@ function getItem(item) {
 
   // открытие popup фоточек карточек
 
-  
   const galleryOpenBtn = cardImage;
   galleryOpenBtn.addEventListener("click", () => {
     showGallery(item);
@@ -161,13 +163,29 @@ const galleryPopup = document.querySelector(".popup_gallery_place");
 
 galleryCloseBtn.addEventListener("click", closeGallery);
 function showGallery(item) {
-  showPopup(galleryPopup)
-  popupGalleryTitle.textContent = item.name
-  popupGalleryImage.src = item.link
+  showPopup(galleryPopup);
+  popupGalleryTitle.textContent = item.name;
+  popupGalleryImage.src = item.link;
 }
 
 function closeGallery() {
-  closePopup(galleryPopup)
+  closePopup(galleryPopup);
 }
 
 render();
+
+//Закрытие popup по нажатию ESC
+function closePopupThenEscape(evt) {
+  if (evt.key === "Escape") {
+    const popupOpened = document.querySelector(".popup_opened");
+    closePopup(popupOpened);
+  }
+}
+
+//Закрытые popup по нажатию на оверлей
+function closePopupOnClickOverplay(evt) {
+  const targetOverlay = evt.target;
+  closePopup(targetOverlay);
+}
+
+popupAll.forEach(overlayEl => overlayEl.addEventListener('mousedown', closePopupOnClickOverplay));

@@ -12,33 +12,48 @@
 	<!-- Попап редактирования профиля -->
 	<div class="popup popup_profile">
 		<div class="popup__container">
-			<button type="button" class="popup__close-btn popup__close-btn_profile elem-click"></button>
+			<button type="button" class="popup__close-btn"></button>
 			<h2 class="popup__title">Редактировать профиль</h2>
-			<form name="profile-edit" class="popup__form">
-				<input type="text" name="profile-name" class="popup__input popup__input_type_username">
-				<input type="text" name="profile-about" class="popup__input popup__input_type_about">
-				<button type="submit" class="popup__save-btn elem-click">Сохранить</button>
+			<form name="profile-edit" class="popup__form" novalidate>
+				<section class="popup__form-section">
+					<input type="text" name="profile-name" class="popup__input popup__input_type_username"
+						placeholder="Имя" id="profile-name" minlength="2" maxlength="40" required>
+					<span id="profile-name-error" class="popup__input-error"></span>
+				</section>
+				<section class="popup__form-section">
+					<input type="text" name="profile-about" class="popup__input popup__input_type_about"
+						placeholder="О себе" id="profile-about" minlength="2" maxlength="200" required>
+					<span id="profile-about-error" class="popup__input-error"></span>
+				</section>
+				<button type="submit" class="popup__save-btn">Сохранить</button>
 			</form>
 		</div>
 	</div>
-	<!-- Попап создания новых фотографий -->
+	<!-- Попап создания новых фотографий --> 
 	<div class="popup popup_place">
 		<div class="popup__container">
-			<button type="button" class="popup__close-btn  popup__close-btn_place elem-click"></button>
+			<button type="button" class="popup__close-btn  popup__close-btn_place"></button>
 			<h2 class="popup__title">Новое место</h2>
-			<form name="profile-edit" class="popup__form popup__form_place">
-				<input type="text" placeholder="Название" name="newplace-name"
-					class="popup__input popup__input_type_name">
-				<input type="text" placeholder="Ссылка на картинку" name="newplace-link"
-					class="popup__input popup__input_type_link">
-				<button type="submit" class="popup__save-btn elem-click">Создать</button>
+			<form name="profile-edit" class="popup__form popup__form_place" novalidate>
+				<section class="popup__form-section">
+					<input type="text" placeholder="Название" name="newplace-name"
+						class="popup__input popup__input_type_name" placeholder="Название" id="newplace-name"
+						minlength="2" maxlength="30" required>
+					<span id="newplace-name-error" class="popup__input-error"></span>
+				</section>
+				<section class="popup__form-section">
+					<input type="url" placeholder="Ссылка на картинку" name="newplace-link"
+						class="popup__input popup__input_type_link" placeholder="Ссылка" id="newplace-link" required>
+					<span id="newplace-link-error" class="popup__input-error"></span>
+				</section>
+				<button type="submit" class="popup__save-btn">Создать</button>
 			</form>
 		</div>
 	</div>
 	<!-- Попап галерии фотографий -->
 	<div class="popup popup_gallery_place">
 		<figure class="gallery">
-			<button type="button" class="popup__close-btn popup__close-btn_gallery elem-click"></button>
+			<button type="button" class="popup__close-btn popup__close-btn_gallery"></button>
 			<img src="#" alt="#" class="popup__image">
 			<figcaption class="popup__title popup__title_gallery"></figcaption>
 		</figure>
@@ -53,11 +68,11 @@
 				<div class="profile__info">
 					<div class="profile__row">
 						<h1 class="profile__name">Жак-Ив Кусто</h1>
-						<button type="button" class="profile__edit-btn elem-click"></button>
+						<button type="button" class="profile__edit-btn"></button>
 					</div>
 					<p class="profile__about">Французский исследователь и писатель</p>
 				</div>
-				<button type="button" class="profile__add-btn elem-click"></button>
+				<button type="button" class="profile__add-btn"></button>
 			</section>
 			<section class="cards">
 			</section>
@@ -70,16 +85,17 @@
 	<template class="template">
 		<article class="card">
 			<div class="card__container">
-				<button type="button" class="card__remove elem-click"></button>
+				<button type="button" class="card__remove"></button>
 			</div>
 			<img src="#" alt="Озеро Байкал" class="card__image">
 			<div class="card__action">
 				<h2 class="card__title"></h2>
-				<button type="button" class="card__like elem-click"></button>
+				<button type="button" class="card__like"></button>
 			</div>
 		</article>
 	</template>
-	<script src="./js/app.js"></script>
+	<script src="./js/app.js" defer></script>
+	<script src="./js/validate.js" defer></script>
 </body>
 
 </html>
