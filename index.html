@@ -29,7 +29,7 @@
 			</form>
 		</div>
 	</div>
-	<!-- Попап создания новых фотографий --> 
+	<!-- Попап создания новых фотографий -->
 	<div class="popup popup_place">
 		<div class="popup__container">
 			<button type="button" class="popup__close-btn  popup__close-btn_place"></button>
@@ -37,13 +37,13 @@
 			<form name="profile-edit" class="popup__form popup__form_place" novalidate>
 				<section class="popup__form-section">
 					<input type="text" placeholder="Название" name="newplace-name"
-						class="popup__input popup__input_type_name" placeholder="Название" id="newplace-name"
-						minlength="2" maxlength="30" required>
+						class="popup__input popup__input_type_name" id="newplace-name" minlength="2" maxlength="30"
+						required>
 					<span id="newplace-name-error" class="popup__input-error"></span>
 				</section>
 				<section class="popup__form-section">
-					<input type="url" placeholder="Ссылка на картинку" name="newplace-link"
-						class="popup__input popup__input_type_link" placeholder="Ссылка" id="newplace-link" required>
+					<input type="url" name="newplace-link" class="popup__input popup__input_type_link"
+						placeholder="Ссылка" id="newplace-link" required>
 					<span id="newplace-link-error" class="popup__input-error"></span>
 				</section>
 				<button type="submit" class="popup__save-btn">Создать</button>
