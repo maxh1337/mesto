@@ -33,9 +33,9 @@ userEditBtn.addEventListener("click", showProfilePopup);
 
 formCloseBtn.addEventListener("click", closeProfilePopup);
 
-formElement.addEventListener("submit", formSubmitHandler);
+formElement.addEventListener("submit", addFormSubmitHandler);
 
-function formSubmitHandler(event) {
+function addFormSubmitHandler(event) {
   //после изменения данных, закрыть popup
   event.preventDefault();
   profileName.textContent = nameInput.value;
@@ -54,6 +54,7 @@ const placeSaveBtn = document.querySelector(".popup__save-btn");
 const popupGalleryTitle = document.querySelector(".popup__title_gallery");
 const popupGalleryImage = document.querySelector(".popup__image");
 const galleryCloseBtn = document.querySelector(".popup__close-btn_gallery");
+const formListener = document.querySelector(".popup__form_place")
 //открыть popup
 function showPlacePopup() {
   showPopup(place);
@@ -61,8 +62,10 @@ function showPlacePopup() {
 //закрыть popup
 function closePlacePopup() {
   closePopup(place);
+
 }
-placeOpenBtn.addEventListener("click", showPlacePopup);
+placeOpenBtn.addEventListener("click", () => showPopup(place));
+//placeOpenBtn.addEventListener("click", showPlacePopup);
 
 placeCloseBtn.addEventListener("click", closePlacePopup);
 
@@ -76,14 +79,14 @@ function saveNewPlace(evt) {
   const inputLink = placeLink.value; //приравниваю значения
   const savePlace = getItem({ link: inputLink, name: inputName }); //добавляю в функцию getItem введенные значения Имени и ссылки на карточку
   cardContainer.prepend(savePlace); //вставляю в блок с карточками собранную конструкцию в самое начало (prepend)
-  inputName.value = ""; // значения будут вставленны в "" скобках
-  inputLink.value = "";
+  placeName.value = ''; // значения будут вставленны в "" скобках
+  placeLink.value = '';
   closePlacePopup(evt); // по окончанию работы функции закрыть popup(блока place)
+  const addCardButton = formListener.querySelector('.popup__save-btn')
+  addCardButton.setAttribute('disabled', true);
 }
 
-const formListener = document
-  .querySelector(".popup__form_place")
-  .addEventListener("submit", saveNewPlace);
+formListener.addEventListener("submit", saveNewPlace);
 
 // Подгрузка блоков card с помощью template тега
 const initialCards = [
@@ -165,6 +168,7 @@ galleryCloseBtn.addEventListener("click", closeGallery);
 function showGallery(item) {
   showPopup(galleryPopup);
   popupGalleryTitle.textContent = item.name;
+  popupGalleryImage.alt = item.name;
   popupGalleryImage.src = item.link;
 }
 
