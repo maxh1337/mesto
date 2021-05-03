@@ -138,7 +138,7 @@ function createCard(src, title) {
 }
 
 // Добавление карточек на страницу
-initialCards.forEach((item) => {
+initialCards.forEach(item => {
 	const cardEl = createCard(item.src, item.title)
 	cardsContainer.append(cardEl)
 })
