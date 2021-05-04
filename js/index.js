@@ -142,3 +142,11 @@ initialCards.forEach(item => {
 	const cardEl = createCard(item.src, item.title)
 	cardsContainer.append(cardEl)
 })
+
+// Валидация профиля
+const profileFormValidation = new FormValidator(validationConfig, formElement)
+profileFormValidation.enableValidation()
+
+// Валидация фото
+const photoFormValidation = new FormValidator(validationConfig, formListener);
+photoFormValidation.enableValidation()

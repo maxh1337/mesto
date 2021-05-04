@@ -2,9 +2,9 @@ class FormValidator {
     constructor(data, formEl) {
         this._formSelector = data.formSelector;
         this._inputSelector = data.inputSelector;
-        this._sumbitButtonSelector = data.sumbitButtonSelector;
+        this._submitButtonSelector = data.submitButtonSelector;
         this._inputErrorClass = data.inputErrorClass;
-        this._textErrorClass = data.textErrorClass;
+        this._errorClass = data.errorClass;
         this._formEl = formEl 
     }
 
@@ -12,7 +12,7 @@ class FormValidator {
         const isInputValid = inputEl.validity.valid;
         if (!isInputValid) {
             const errorMessage = inputEl.validationMessage;
-            showInputError(formEl,inputEl,errorMessage, inputErrorClass, textErrorClass);
+            showInputError(formEl,inputEl,errorMessage, inputErrorClass, errorClass);
        }else {
            hideInputError(formEl, inputEl, inputErrorClass)
        }     
@@ -21,17 +21,17 @@ class FormValidator {
     // Показываю ошибку при валидации
     _showInputError(inputEl, errorMessage) {
         inputEl.classList.add(this._inputErrorClass);
-        const errorEl = this._formEl.querySelector(`#${inputel.id}-error`)
+        const errorEl = this._formEl.querySelector(`#${inputEl.id}-error`)
         errorEl.textContent = errorMessage
-        errorEl.classList.add(this._textErrorClass)
+        errorEl.classList.add(this._errorClass)
     }
 
     // Скрываю ошибку при валидации
     _hideInputError(inputEl) {
         inputEl.classList.remove(this._inputErrorClass)
-        const errorEl = this._formEl.querySelector(`#${inputel.id}-error`)
+        const errorEl = this._formEl.querySelector(`#${inputEl.id}-error`)
         errorEl.textContent = ''
-        errorEl.classList.remove(this._textErrorClass)
+        errorEl.classList.remove(this._errorClass)
     }
 
     // Проверяю валидность полей
@@ -66,7 +66,7 @@ class FormValidator {
             event.preventDefault()
         });
         this._inputList = Array.from(this._formEl.querySelectorAll(this._inputSelector))
-        this._buttonEl = this._formEl.querySelector(this._sumbitButtonSelector)
+        this._buttonEl = this._formEl.querySelector(this._submitButtonSelector)
         this._inputList.forEach(inputEl => {
             inputEl.addEventListener('input', () => {
                 this._checkInputValidity(inputEl)
