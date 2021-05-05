@@ -42,6 +42,7 @@ function showProfilePopup() {
 }
 function closeProfilePopup() {
   closePopup(profilePopup);
+  profileFormValidation.resetValidation()
 }
 
 userEditBtn.addEventListener("click", showProfilePopup);
@@ -68,16 +69,13 @@ function addFormSubmitHandler(event) {
   closeProfilePopup();
 }
 
-// Popup с додавлением новой карточки (place)
-
-//открыть popup
-function showPlacePopup() {
-  showPopup(place);
-}
 //закрыть popup
 function closePlacePopup() {
   closePopup(place);
-}
+  photoInputTitle.value = '' ;
+  photoInputLink.value = '' ;
+  photoFormValidation.resetValidation()
+  }
 // Открытие popup c карточкой
 
 const galleryPopup = document.querySelector(".popup_gallery_place");
@@ -114,7 +112,8 @@ function addNewCard(event) {
 	cardsContainer.prepend(createCard(photoInputLink.value, photoInputTitle.value))
   photoInputTitle.value = '' ;
   photoInputLink.value = '' ;
-	closePopup(place)
+	closePopup(place);
+  photoFormValidation.resetValidation()
 }
 
 // Возвращаем готовую карточку
