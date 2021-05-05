@@ -78,21 +78,6 @@ function showPlacePopup() {
 function closePlacePopup() {
   closePopup(place);
 }
-
-//функция удаления в которой удаляется самый ближний элемент card
-function handleRemove(event) {
-  const targetEl = event.target;
-  const targetItem = targetEl.closest(".card");
-  targetItem.remove();
-}
-
-//как и в примере с удалением, лайк ставится на самый близкий
-function handleLike(event) {
-  const targetEl = event.target;
-  const targetItem = targetEl.closest(".card__like");
-  targetItem.classList.toggle("card__like_filled");
-}
-
 // Открытие popup c карточкой
 
 const galleryPopup = document.querySelector(".popup_gallery_place");
@@ -127,7 +112,9 @@ function closePopupOnClickOverplay(evt) {
 function addNewCard(event) {
 	event.preventDefault()
 	cardsContainer.prepend(createCard(photoInputLink.value, photoInputTitle.value))
-	closePopup(photoPopup)
+  photoInputTitle.value = '' ;
+  photoInputLink.value = '' ;
+	closePopup(place)
 }
 
 // Возвращаем готовую карточку
