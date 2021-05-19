@@ -7,17 +7,19 @@
       this._previewCardImage = previewCardImage;    
     }
     _getCard(){
-      const cardEl = document.querySelector(this._templateSelector).content.querySelector('.card').cloneNode(true);
+      const cardEl = document.querySelector(this._templateSelector)
+      .content.querySelector('.card')
+      .cloneNode(true);
+
       return cardEl;
     }
     generateCard() {
-      this._element = this._getCard();
-      this._setEventListeners();
-      const cardImage = this._element.querySelector('.card__image');
-      cardImage.src = this._image;
-      cardImage.alt = this._alt;
-      this._element.querySelector('.card__title').textContent = this._title;
-
+      this._element = this._getCard()
+      this._setEventListeners()
+      this._element.querySelector('.card__image').src = this._image
+      this._element.querySelector('.card__image').alt = this._alt
+      this._element.querySelector('.card__title').textContent = this._title
+  
       return this._element
     }
     _setEventListeners() {
@@ -40,7 +42,7 @@
       setTimeout(() => {
         this._element.remove()
         this._element = null
-      }, 800);
+      }, 1000);
     }
     _likeCard(){
       this._likeBtn.classList.toggle('card__like_filled')

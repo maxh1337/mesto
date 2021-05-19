@@ -1,6 +1,12 @@
-import Card from './Card.js'
+
+
+import Card from '../components/Card.js'
 import { initialCards, validationConfig} from './data.js'
-import FormValidator from './FormValidator.js'
+import FormValidator from '../components/FormValidator.js'
+import Section from '../components/Section.js'
+import PopupWithImage from '../components/PopupWithImage.js'
+import PopupWithForm from '../components/PopupWithForm.js'
+import UserInfo from '../components/UserInfo.js'
 
 //Будет много комментариев, я тупой. И они помогут мне потом понять, что я вообще тут накодил) :) Thanks.
 const profilePopup = document.querySelector(".popup_profile");
@@ -13,6 +19,7 @@ const nameInput = document.querySelector(".popup__input_type_username");
 const aboutInput = document.querySelector(".popup__input_type_about");
 const popupAll = document.querySelectorAll('.popup')
 const place = document.querySelector(".popup_place");
+const previewPopup = '.popup_place_gallery'
 const placeCloseBtn = document.querySelector(".popup__close-btn_place");
 const placeOpenBtn = document.querySelector(".profile__add-btn");
 const placeSaveBtn = document.querySelector(".popup__save-btn");
@@ -23,116 +30,80 @@ const formListener = document.querySelector(".popup__form_place");
 const cardsContainer = document.querySelector(".cards");
 const photoInputLink = document.querySelector('.popup__input_type_link')
 const photoInputTitle = document.querySelector('.popup__input_type_name')
+  
+const cardList = new Section({
+		data: initialCards,
+		renderer: item => {
+			const newCard = new Card(item, '.template', previewImage)
+			const cardEl = newCard.generateCard()
+			cardList.addItem(cardEl)
+		}
+	}, cardsContainer)
 
-//первый popup с редактированием информации о человеке
-function showPopup(popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keydown", closePopupThenEscape);
+const previewImagePopup = new PopupWithImage(previewPopup)
+
+function previewImage(src, title, alt) {
+	previewImagePopup.open(src, title, alt)
 }
 
-function closePopup(popup) {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", closePopupThenEscape);
-}
+const addCardPopup = new PopupWithForm({
+	popupSelector: place,
+	handleFormSubmit: (formData) => {
+		const newCard = new Card({
+			title: formData['photo-name'],
+			src: formData['photo-link']
+		}, '.template', previewImage)
 
-function showProfilePopup() {
-  showPopup(profilePopup);
-  nameInput.value = profileName.textContent;
-  aboutInput.value = profileAbout.textContent;
-}
-function closeProfilePopup() {
-  closePopup(profilePopup);
-  profileFormValidation.resetValidation()
-}
-
-userEditBtn.addEventListener("click", showProfilePopup);
-
-formCloseBtn.addEventListener("click", closeProfilePopup);
-
-formElement.addEventListener("submit", addFormSubmitHandler);
-
-placeOpenBtn.addEventListener("click", () => showPopup(place));
-
-placeCloseBtn.addEventListener("click", closePlacePopup);
-
-placeSaveBtn.addEventListener("submit", addNewCard);
-
-popupAll.forEach(overlayEl => overlayEl.addEventListener('mousedown', closePopupOnClickOverplay));
-
-formListener.addEventListener("submit", addNewCard);
-
-function addFormSubmitHandler(event) {
-  //после изменения данных, закрыть popup
-  event.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileAbout.textContent = aboutInput.value;
-  closeProfilePopup();
-}
-
-//закрыть popup
-function closePlacePopup() {
-  closePopup(place);
-  photoInputTitle.value = '' ;
-  photoInputLink.value = '' ;
-  photoFormValidation.resetValidation()
-  }
-// Открытие popup c карточкой
-
-const galleryPopup = document.querySelector(".popup_gallery_place");
-
-galleryCloseBtn.addEventListener("click", closeGallery);
-
-function showGallery(image,title) {
-  popupGalleryTitle.textContent = title
-  popupGalleryImage.src = image
-  showPopup(galleryPopup);
-}
-
-function closeGallery() {
-  closePopup(galleryPopup);
-}
-
-//Закрытие popup по нажатию ESC
-function closePopupThenEscape(evt) {
-  if (evt.key === "Escape") {
-    const popupOpened = document.querySelector(".popup_opened");
-    closePopup(popupOpened);
-  }
-}
-
-//Закрытые popup по нажатию на оверлей
-function closePopupOnClickOverplay(evt) {
-  const targetOverlay = evt.target;
-  closePopup(targetOverlay);
-}
-
-// Обработчик формы добавления новой карточки на страницу
-function addNewCard(event) {
-	event.preventDefault()
-	cardsContainer.prepend(createCard(photoInputLink.value, photoInputTitle.value))
-  photoInputTitle.value = '' ;
-  photoInputLink.value = '' ;
-	closePopup(place);
-  photoFormValidation.resetValidation()
-}
-
-// Возвращаем готовую карточку
-function createCard(src, title) {
-	const card = new Card({ src, title }, '.template', showGallery)
-	const cardEl = card.generateCard()
-	return cardEl
-}
-
-// Добавление карточек на страницу
-initialCards.forEach(item => {
-	const cardEl = createCard(item.src, item.title)
-	cardsContainer.append(cardEl)
+		const cardEl = newCard.generateCard()
+		cardList.addItem(cardEl)
+		addCardPopup.close()
+	}
 })
 
-// Валидация профиля
-const profileFormValidation = new FormValidator(validationConfig, formElement)
-profileFormValidation.enableValidation()
+addCardBtn.addEventListener('click', () => {
+	photoFormValidator.resetValidation()
+	addCardPopup.open()
+});
 
-// Валидация фото
-const photoFormValidation = new FormValidator(validationConfig, formListener);
-photoFormValidation.enableValidation()
+// Редактирование профиля
+const editProfilePopup = new PopupWithForm({
+	popupSelector: profilePopup,
+	handleFormSubmit: (formData) => {
+		userInfo.setUserInfo({
+			userNameValue: formData['profile-name'],
+			userAboutValue: formData['profile-about']
+		});
+		editProfilePopup.close()
+	}
+})
+
+const userInfo = new UserInfo({
+	userNameSelector: profileName,
+	userAboutSelector: profileAbout
+})
+
+// Заполняем поля в попапе для редактирования профиля
+const getProfileInfo = () => {
+	const profileInfo = userInfo.getUserInfo()
+	profilePopupNameInput.value = profileInfo.userName
+	profilePopupAboutInput.value = profileInfo.userAbout
+	profileFormValidator.resetValidation()
+	editProfilePopup.open()
+}
+
+profileEditBtn.addEventListener('click', getProfileInfo)
+
+// Вешаем слушатели на попапы
+previewImagePopup.setEventListeners()
+addCardPopup.setEventListeners()
+editProfilePopup.setEventListeners()
+
+// Валидация попапа для редактирования профиля
+const profileFormValidator = new FormValidator(validationConfig, profilePopupForm)
+profileFormValidator.enableValidation()
+
+// Валидация попапа для добавления новой карточки
+const photoFormValidator = new FormValidator(validationConfig, photoPopupForm)
+photoFormValidator.enableValidation()
+
+cardList.renderItems()
