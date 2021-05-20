@@ -1,5 +1,3 @@
-
-
 import Card from '../components/Card.js'
 import { initialCards, validationConfig} from './data.js'
 import FormValidator from '../components/FormValidator.js'
@@ -9,57 +7,63 @@ import PopupWithForm from '../components/PopupWithForm.js'
 import UserInfo from '../components/UserInfo.js'
 
 //Будет много комментариев, я тупой. И они помогут мне потом понять, что я вообще тут накодил) :) Thanks.
-const profilePopup = document.querySelector(".popup_profile");
-const profileName = document.querySelector(".profile__name");
-const profileAbout = document.querySelector(".profile__about");
-const userEditBtn = document.querySelector(".profile__edit-btn");
-const formCloseBtn = profilePopup.querySelector(".popup__close-btn");
-const formElement = profilePopup.querySelector(".popup__form");
-const nameInput = document.querySelector(".popup__input_type_username");
-const aboutInput = document.querySelector(".popup__input_type_about");
+
+
+// const formCloseBtn = profilePopup.querySelector(".popup__close-btn");
 const popupAll = document.querySelectorAll('.popup')
-const place = document.querySelector(".popup_place");
-const previewPopup = document.querySelector('.popup_place_gallery');
 const placeCloseBtn = document.querySelector(".popup__close-btn_place");
-const placeOpenBtn = document.querySelector(".profile__add-btn");
 const placeSaveBtn = document.querySelector(".popup__save-btn");
 const popupGalleryTitle = document.querySelector(".popup__title_gallery");
 const popupGalleryImage = document.querySelector(".popup__image");
 const galleryCloseBtn = document.querySelector(".popup__close-btn_gallery");
-const formListener = document.querySelector(".popup__form_place");
-
 const photoInputLink = document.querySelector('.popup__input_type_link')
 const photoInputTitle = document.querySelector('.popup__input_type_name')
 
+
 const cardsContainer = document.querySelector(".cards");
+const previewPopup = document.querySelector('.popup_gallery_place');
+const photoPopup = document.querySelector(".popup_place");
+const profilePopup = document.querySelector(".popup_profile");
+const addCardBtn = document.querySelector(".profile__add-btn");
+const profileEditBtn = document.querySelector(".profile__edit-btn");
+const profileName = document.querySelector(".profile__name");
+const profileAbout = document.querySelector(".profile__about");
+const nameInput = document.querySelector(".popup__input_type_username");
+const aboutInput = document.querySelector(".popup__input_type_about");
+const profilePopupForm = profilePopup.querySelector(".popup__form");
+const photoPopupForm = document.querySelector(".popup__form_place");
 
+// Формируем карточку
+const getCard = (data) => {
+	const newCard = new Card(
+		data,
+		'.template',
+		() => previewImagePopup.open(data.src, data.title)
+	)
 
+	return newCard.generateCard()
+}
 
-const cardList = new Section({
+// Добавление карточек из массива на страницу
+const cardList = new Section(
+	{
 		data: initialCards,
-		renderer: item => {
-			const newCard = new Card(item, '.template', previewPopup)
-			const cardEl = newCard.generateCard()
-			cardList.addItem(cardEl)
+		renderer: (data) => {
+			cardList.addItem(getCard(data))
 		}
 	}, cardsContainer)
 
 const previewImagePopup = new PopupWithImage(previewPopup)
 
-function previewImage(src, title, alt) {
-	previewImagePopup.open(src, title, alt)
-}
-
+// Вставляем новую карточку через попап
 const addCardPopup = new PopupWithForm({
-	popupSelector: place,
+	popupSelector: photoPopup,
 	handleFormSubmit: (formData) => {
-		const newCard = new Card({
+		cardList.addItem(getCard({
 			title: formData['photo-name'],
 			src: formData['photo-link']
-		}, '.template', previewImage)
+		}))
 
-		const cardEl = newCard.generateCard()
-		cardList.addItem(cardEl)
 		addCardPopup.close()
 	}
 })
@@ -89,8 +93,8 @@ const userInfo = new UserInfo({
 // Заполняем поля в попапе для редактирования профиля
 const getProfileInfo = () => {
 	const profileInfo = userInfo.getUserInfo()
-	profilePopupNameInput.value = profileInfo.userName
-	profilePopupAboutInput.value = profileInfo.userAbout
+	nameInput.value = profileInfo.userName
+	aboutInput.value = profileInfo.userAbout
 	profileFormValidator.resetValidation()
 	editProfilePopup.open()
 }

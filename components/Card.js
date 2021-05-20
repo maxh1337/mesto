@@ -1,10 +1,10 @@
   class Card {
-    constructor(data, templateSelector, previewCardImage) {
+    constructor(data, templateSelector, handleCardClick) {
       this._image = data.src;
       this._alt = data.alt;
       this._title = data.title
       this._templateSelector = templateSelector;
-      this._previewCardImage = previewCardImage;    
+      this._handleCardClick = handleCardClick;    
     }
     _getCard(){
       const cardEl = document.querySelector(this._templateSelector)
@@ -33,7 +33,7 @@
       });
       
       this._element.querySelector('.card__image').addEventListener('click', () => {
-        this._previewCardImage(this._image, this._title)
+        this._handleCardClick(this._image, this._title)
       });
     }
     _removeCard() {
