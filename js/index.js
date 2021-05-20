@@ -19,7 +19,7 @@ const nameInput = document.querySelector(".popup__input_type_username");
 const aboutInput = document.querySelector(".popup__input_type_about");
 const popupAll = document.querySelectorAll('.popup')
 const place = document.querySelector(".popup_place");
-const previewPopup = '.popup_place_gallery'
+const previewPopup = document.querySelector('.popup_place_gallery');
 const placeCloseBtn = document.querySelector(".popup__close-btn_place");
 const placeOpenBtn = document.querySelector(".profile__add-btn");
 const placeSaveBtn = document.querySelector(".popup__save-btn");
@@ -27,14 +27,18 @@ const popupGalleryTitle = document.querySelector(".popup__title_gallery");
 const popupGalleryImage = document.querySelector(".popup__image");
 const galleryCloseBtn = document.querySelector(".popup__close-btn_gallery");
 const formListener = document.querySelector(".popup__form_place");
-const cardsContainer = document.querySelector(".cards");
+
 const photoInputLink = document.querySelector('.popup__input_type_link')
 const photoInputTitle = document.querySelector('.popup__input_type_name')
-  
+
+const cardsContainer = document.querySelector(".cards");
+
+
+
 const cardList = new Section({
 		data: initialCards,
 		renderer: item => {
-			const newCard = new Card(item, '.template', previewImage)
+			const newCard = new Card(item, '.template', previewPopup)
 			const cardEl = newCard.generateCard()
 			cardList.addItem(cardEl)
 		}
