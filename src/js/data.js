@@ -1,37 +1,39 @@
-// import baikal from '../images/baikal.jpg'
-// import ermitazh from '../images/ermitazh.jpg'
-// import kizhi from '../images/kizhi.jpg'
-// import rodinamother from '../images/rodinamother.jpg'
-// import ozerodjeka from '../images/card-ozero_dzeka_londona.jpg'
-// import georgiy from '../images/georgiy.jpg'
+import baikal from '../images/baikal.jpg'
+import ermitazh from '../images/ermitazh.jpg'
+import kizhi from '../images/kizhi.jpg'
+import rodinamother from '../images/rodinamother.jpg'
+import ozerodjeka from '../images/card-ozero_dzeka_londona.jpg'
+import georgiy from '../images/georgiy.jpg'
 
 
 const initialCards = [
     {
       title: "Байкал",
-      src: '../images/baikal.jpg'
+      src: baikal
     },
     {
       title: "Эрмитаж",
-      src: '../images/ermitazh.jpg'
+      src: ermitazh
     },
     {
       title: "Кижи",
-      src: '../images/kizhi.jpg'
+      src: kizhi
     },
     {
       title: "Родина-мать",
-      src: '../images/rodinamother.jpg'
+      src: rodinamother
     },
     {
       title: "Озеро Джека Лондона",
-      src: '../images/card-ozero_dzeka_londona.jpg'
+      src: ozerodjeka
     },
     {
       title: "Церковь Георгия Победоносца",
-      src: '../images/georgiy.jpg'
+      src: georgiy
     },
   ];
+
+
 
 
  const validationConfig = {
