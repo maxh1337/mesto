@@ -2,7 +2,7 @@ const ESCAPE_KEY = 'Escape'
 
 export default class Popup {
 	constructor(popupSelector) {
-		this._popupEl = popupSelector;
+		this._popupEl = popupSelector
 		this.close = this.close.bind(this);
 		this._handleEscClose = this._handleEscClose.bind(this);
 	}

@@ -9,7 +9,7 @@ export default class PopupWihtImage extends Popup {
 
 	open(link, title) {
 		super.open()
-		popupImg.src = link
-		popupCaption.textContent = title
+		this._popupImg.src = link
+		this._popupCaption.textContent = title
 	}
 }
